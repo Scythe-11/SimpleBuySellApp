@@ -43,5 +43,37 @@ const Advert = sequelize.define('advert', {
   timestamps: false
 })
 
+app.get('/adverts', (req, res) => {
+	Advert.findAll({
+	  attributes: ['id', 'title', 'description', 'image', 'price', 'email', 'phone']
+	})
+	  .then(result => {
+	    // do something with result
+	    res.send({
+	    	adverts: result
+	    })
+	  })
+	  .catch(err => {
+	    // there was an error, return some HTTP error code
+	    res.status(500).send({error: 'Something went wrong with Postgres'})
+	  })
+})
+
+app.get('/adverts/:id', (req, res) => {
+	const advertId = req.params.id
+	Advert.findById(advertId)
+	  .then(result => {
+	  	if (!result) {
+	  		res.status(404).send({error: 'Does not exist'})
+	  	}
+	  	else {
+	  		res.send(result)
+	  	}
+	  })
+	  .catch(err => {
+	    res.status(500).send({error: 'Something went wrong with Postgres'})
+	  })
+})
+
 
 Advert.findById(1).then(advert => console.log(JSON.stringify(advert)))
