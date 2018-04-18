@@ -1,22 +1,30 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {fetchAllAdverts} from '../actions/adverts'
+import {fetchAllAdverts, createAdvert, deleteAdvert} from '../actions/adverts'
 import {Link} from 'react-router-dom'
+import AdvertForm from './AdvertForm'
 
 class AdvertsList extends PureComponent {
   static propTypes = {
-    products: PropTypes.arrayOf(PropTypes.shape({
+    adverts: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired
     })).isRequired
   }
 
+  createAdvert = (advert) => {
+    this.props.createAdvert(advert)
+  }
+
+  deleteAdvert = (AdvertId) => {
+    this.props.deleteAdvert(AdvertId)
+  }
+
   componentWillMount() {
-      this.props.fetchAllAdverts()
-    }
+    this.props.fetchAllAdverts()
+  }
 
   render() {
     const {adverts} = this.props
@@ -28,20 +36,26 @@ class AdvertsList extends PureComponent {
           <thead>
             <tr>
               <th>#</th>
-              <th>Title</th>
-              <th>Image</th>
+              <th>Name</th>
               <th>Price</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             { adverts.map(advert => (<tr key={advert.id}>
               <td>{advert.id}</td>
-              <Link to={ `/adverts/${advert.id}` }>{advert.title}</Link>
-              <td>{advert.image}</td>
+              <td>
+                <Link to={ `/adverts/${advert.id}` }>{advert.name}</Link>
+              </td>
               <td>&euro; {advert.price}.00</td>
+              <td><button onClick={ () => this.deleteAdvert(advert.id) }>X</button></td>
             </tr>)) }
           </tbody>
 				</table>
+
+        <h1>Create a new Advert</h1>
+
+        <AdvertForm onSubmit={this.createAdvert} />
       </div>
     )
   }
@@ -53,4 +67,8 @@ const mapStateToProps = function (state) {
   }
 }
 
-export default connect(mapStateToProps, {fetchAllAdverts})(AdvertsList)
+export default connect(mapStateToProps, {
+  fetchAllAdverts,
+  createAdvert,
+  deleteAdvert
+})(AdvertsList)
