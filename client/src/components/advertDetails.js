@@ -1,11 +1,12 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
-import {fetchAdvert, updateAdvert} from '../actions/adverts'
+import {fetchAdvert} from '../actions/adverts'
 import AdvertForm from './AdvertForm'
+import PropTypes from 'prop-types'
 
 
 class AdvertDetails extends PureComponent {
-  state = {
+/*  state = {
     edit: false
   }
 
@@ -14,14 +15,9 @@ class AdvertDetails extends PureComponent {
       edit: !this.state.edit
     })
   }
-
+*/
   componentWillMount(props) {
     this.props.fetchAdvert(this.props.match.params.id)
-  }
-
-  updateAdvert = (advert) => {
-    this.props.updateAdvert(this.props.match.params.id, advert)
-    this.toggleEdit()
   }
 
   render() {
@@ -30,19 +26,13 @@ class AdvertDetails extends PureComponent {
 
     return (
       <div>
-        {
-          this.state.edit &&
-          <AdvertForm initialValues={advert} onSubmit={this.updateAdvert} />
-        }
-
-        {
-          !this.state.edit &&
-          <div>
-            <button onClick={ this.toggleEdit }>edit</button>
-            <h1>{ advert.title }</h1>
-          </div>
-        }
-      </div>
+           <h1>Advertised product: {advert.title}</h1>
+           <h3>Price: {advert.price} €</h3>
+           <h3>Description: {advert.description}</h3>
+           <h3>Link to image: <a href={advert.image}>{advert.image}</a></h3>
+           <h3>Contact Email: <a href='mailto:'>{advert.email}</a></h3>
+           <h3>Contact Phone number: {advert.phone}</h3>
+        </div>
     )
   }
 }
@@ -51,4 +41,4 @@ const mapStateToProps = function (state, props) {
     advert: state.advert
   }
 }
-export default connect(mapStateToProps, {fetchAdvert, updateAdvert})(AdvertDetails)
+export default connect(mapStateToProps, {fetchAdvert})(AdvertDetails)

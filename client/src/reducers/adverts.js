@@ -1,4 +1,4 @@
-import {FETCHED_ALL_ADVERTS, ADD_ADVERT, REMOVE_ADVERT, UPDATE_ADVERT} from '../actions/adverts'
+import {FETCHED_ALL_ADVERTS, ADD_ADVERT, REMOVE_ADVERT} from '../actions/adverts'
 
 export default function (state = [], action) {
   switch (action.type) {
@@ -11,13 +11,6 @@ export default function (state = [], action) {
   	case REMOVE_ADVERT:
   	  return state.filter(advert => advert.id !== action.payload)
 
-    case UPDATE_ADVERT:
-      return state.map(advert => {
-        if (advert.id === action.payload.id) {
-          return action.payload
-        }
-        else return advert
-      })
 
     default:
       return state

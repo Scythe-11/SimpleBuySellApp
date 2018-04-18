@@ -10,8 +10,12 @@ class AdvertsList extends PureComponent {
   static propTypes = {
     adverts: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      email: PropTypes.string.isRequired,
+      phone: PropTypes.string.isRequired
     })).isRequired
   }
 

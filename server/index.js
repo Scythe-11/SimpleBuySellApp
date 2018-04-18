@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
 
+app.use(bodyParser.json())
 
 var Sequelize = require('sequelize')
 var sequelize = new Sequelize('postgres://postgres:secret@localhost:5432/postgres')
@@ -17,27 +19,22 @@ app.use(function(req, res, next) {
 
 const Advert = sequelize.define('advert', {
   title: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   description: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   image: {
     type: Sequelize.STRING,
   },
   price: {
-    type: Sequelize.INTEGER,
-    allowNull: false
+    type: Sequelize.INTEGER
   },
   email: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   phone: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   }}, {
   tableName: 'adverts',
   timestamps: false
@@ -80,35 +77,10 @@ app.post('/adverts', (req, res) => {
   console.log(advert)
 
   Advert.create(advert).then(entity => {
-
-    // send back the 201 Created status and the entity
     res.status(201).send(entity)
   })
 })
 
-
-app.put('/adverts/:id', (req, res) => {
-  const advertId = Number(req.params.id)
-  const updates = req.body
-
-  // find the product in the DB
-  Advert.findById(req.params.id)
-    .then(entity => {
-      // change the product and store in DB
-      return entity.update(updates)
-    })
-    .then(final => {
-      // respond with the changed product and status code 200 OK
-      res.send(final)
-    })
-    .catch(error => {
-      res.status(500).send({
-        message: `Something went wrong`,
-        error
-      })
-    })
-
-})
 
 app.delete('/adverts/:id', (req, res) => {
   const advertId = Number(req.params.id)
