@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {fetchAllAdverts, createAdvert, deleteAdvert} from '../actions/adverts'
 import {Link} from 'react-router-dom'
 import AdvertForm from './AdvertForm'
+import './advertList.css'
 
 class AdvertsList extends PureComponent {
   static propTypes = {
@@ -37,6 +38,7 @@ class AdvertsList extends PureComponent {
             <tr>
               <th>#</th>
               <th>Name</th>
+              <th>Image</th>
               <th>Price</th>
               <th></th>
             </tr>
@@ -45,8 +47,10 @@ class AdvertsList extends PureComponent {
             { adverts.map(advert => (<tr key={advert.id}>
               <td>{advert.id}</td>
               <td>
-                <Link to={ `/adverts/${advert.id}` }>{advert.name}</Link>
+                <Link to={ `/adverts/${advert.id}` }>{advert.title}</Link>
               </td>
+              <td>{ advert.image ?  <img src = { advert.image } className="imageClass"/> : <p>There is no image for this product</p>}
+           </td>
               <td>&euro; {advert.price}.00</td>
               <td><button onClick={ () => this.deleteAdvert(advert.id) }>X</button></td>
             </tr>)) }
