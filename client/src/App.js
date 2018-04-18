@@ -21,8 +21,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <AdvertsList adverts={ adverts } />
-        <AdvertDetails adverts={ adverts[0] } />
+        <AdvertsList />
+        <AdvertDetails />
       </div>
     )
   }

@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-//import {connect} from 'react-redux'
+import {connect} from 'react-redux'
 //import {fetchProduct, updateProduct} from '../actions/products'
 //import ProductForm from './ProductForm'
 
@@ -10,10 +10,16 @@ class AdvertDetails extends PureComponent {
     if (!advert) return null
     return (
       <div>
-        <h1>{ advert.id }</h1>
+        <h1>{ advert.description }</h1>
       </div>
     )
   }
 }
 
-export default AdvertDetails
+const mapStateToProps = function (state) {
+  return {
+    advert: state.adverts.find(advert => advert.id === 7)
+  }
+}
+
+export default connect(mapStateToProps)(AdvertDetails)
