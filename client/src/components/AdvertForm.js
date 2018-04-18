@@ -63,7 +63,7 @@ class AdvertForm extends PureComponent {
 					} onChange={ this.handleChange } />
 				</div>
 
-				<button type="submit">Save</button>
+				<button type="submit" className="button">Save</button>
 			</form>
 		)
 	}

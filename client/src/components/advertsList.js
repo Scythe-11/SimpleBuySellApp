@@ -37,7 +37,7 @@ class AdvertsList extends PureComponent {
       <div>
         <h1>All Adverts</h1>
 
-        <table>
+        <table align="center">>
           <thead>
             <tr>
               <th>#</th>
@@ -56,7 +56,7 @@ class AdvertsList extends PureComponent {
               <td>{ advert.image ?  <img src = { advert.image } className="imageClass"/> : <p>There is no image for this product</p>}
            </td>
               <td>&euro; {advert.price}.00</td>
-              <td><button onClick={ () => this.deleteAdvert(advert.id) }>X</button></td>
+              <td><button onClick={ () => this.deleteAdvert(advert.id) }className="button">X</button></td>
             </tr>)) }
           </tbody>
 				</table>
