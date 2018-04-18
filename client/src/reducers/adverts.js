@@ -1,24 +1,10 @@
-// adverts.js
-const adverts = [
-  {
-    id: 1,
-    title: 'Handbag',
-    price: 1450
-  },
-  {
-    id: 5,
-    title: 'Heater',
-    price: 550
-  },
-  {
-    id: 7,
-    title: 'T-shirt',
-    price: 10
-  }
-]
+import {FETCHED_ALL_ADVERTS} from '../actions/adverts'
 
-export default function (state = adverts, action) {
+export default function (state = [], action) {
   switch (action.type) {
+    case FETCHED_ALL_ADVERTS:
+      return action.payload
+
     default:
       return state
   }

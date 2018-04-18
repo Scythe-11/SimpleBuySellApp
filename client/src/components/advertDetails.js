@@ -5,6 +5,9 @@ import {connect} from 'react-redux'
 
 
 class AdvertDetails extends PureComponent {
+  componentWillMount(props) {
+    this.props.fetchAdvert(this.props.match.params.id)
+  }
   render() {
     const {advert} = this.props
     if (!advert) return null
@@ -18,7 +21,7 @@ class AdvertDetails extends PureComponent {
 
 const mapStateToProps = function (state, props) {
   return {
-    advert: state.adverts.find(p => p.id === Number(props.match.params.id))
+    advert: state.advert
   }
 }
 

@@ -1,8 +1,7 @@
 // reducers/index.js
 import adverts from './adverts'
-//import product from './product'
+import advert from './adverts'
 
 export default {
-	adverts
-//	product
+	adverts, advert
 }
