@@ -16,9 +16,9 @@ class AdvertDetails extends PureComponent {
   }
 }
 
-const mapStateToProps = function (state) {
+const mapStateToProps = function (state, props) {
   return {
-    advert: state.adverts.find(advert => advert.id === 7)
+    advert: state.adverts.find(p => p.id === Number(props.match.params.id))
   }
 }
 

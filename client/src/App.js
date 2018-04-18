@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import AdvertsList from './components/advertsList'
 import AdvertDetails from './components/advertDetails'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
 const adverts = [
   {
@@ -20,10 +21,13 @@ const adverts = [
 class App extends Component {
   render() {
     return (
-      <div>
-        <AdvertsList />
-        <AdvertDetails />
-      </div>
+      <Router>
+        <div>
+          <Route exact path="/adverts" component={AdvertsList} />
+          <Route exact path="/products/:id" component={AdvertDetails} />
+          <Route exact path="/" render={ () => <Redirect to="/adverts" /> } />
+        </div>
+      </Router>
     )
   }
 }
